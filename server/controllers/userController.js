@@ -142,10 +142,12 @@ const paymentRazorpay=async(req,res)=>{
         console.log(error)
        return  res.json({success:false,message:error})
       }
-      res.json({success:true,order})
+      res.json({success:true, order,
+    key: process.env.RAZORPAY_KEY_ID
+  });
+})
 
-    })
-
+    
   }
   catch(error)
   {

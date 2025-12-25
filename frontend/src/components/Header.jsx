@@ -1,73 +1,97 @@
 import React, { useContext } from 'react'
-import { motion } from "motion/react"
 import { assets } from '../assets/assets'
-import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion' // 'motion/react' ko 'framer-motion' se replace kiya
 import { AppContext } from '../context/AppContext'
-
+import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
-  const {user, setshowLogin}=useContext(AppContext)
-  const navigate=useNavigate();
+  const { user, setShowLogin } = useContext(AppContext)
+  const navigate = useNavigate()
 
-  const onClickHandler=()=>{
-    if(user){
+  const onClickHandler = () => {
+    if (user) {
       navigate('/result')
-    }
-    else{
-      setshowLogin(true)
+    } else {
+      setShowLogin(true)
     }
   }
 
   return (
-    <motion.div className='flex flex-col justify-center items-center text-center my-20'
-    initial={{opacity:0.2,y:100}}
-    transition={{duration:1}}
-    whileInView={{opacity:1,y:0}}
-    viewport={{once:true}}
+    <motion.div 
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className='flex flex-col items-center text-center mt-10 px-4'
     >
-        <motion.div className='text-stone-500 inline-flex text-center gap-2 bg-white px-6 py-1 rounded-full border border-neutral-500'
-        initial={{opacity:0,y:-20}}
-    
-    animate={{opacity:1,y:0}}
-    viewport={{once:true}}
-    transition={{delay:0.2,duration:0.8}}
-        >
-            <p>
-               Best text to image generator
-               <img src={assets.star_icon} alt="" /> 
-            </p>
-        </motion.div>
-        <motion.h1 className='text-4xl max-w-[300pc] sm:max-w-[590] mx-auto mt-10 text-center'>Turn text to <span className='text-pink-600'
-           initial={{opacity:1 ,y:0}}
-           animate={{opacity:1,duration:0.8}}
-           transition={{delay:0.6,duration:0.8}}>
-          image</span>, in seconds.</motion.h1>
-        <p className='text-center max-w-xl mx-auto mt-5'>Unleash your creativity with AI. Turn your imagination into visual art in seconds- just type , and watch the magic happen.</p>
-   
-    <motion.button onClick={onClickHandler} className='sm:text-lg text-white bg-black w-auto mt-8 px-12 py-2.5 flex items-center gap-2 rounded-full'
-    whileHover={{scale:1.05}}
-    whileTap={{scale:0.95}}
-    initial={{opacity:0}}
-    animate={{opacity:1}}
-    transition={{default:{duration:0.5},opacity:{delay:0.8,duration:1}}}
-    >Generate Images
-    <img className='h-6' src={assets.star_group} alt="" />
-   </motion.button>
+      {/* 1. Pro Badge Styling (Static/Non-editable feel) */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 1 }}
+        className='inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white border border-indigo-100 shadow-sm mb-8'
+      >
+        <div className='flex items-center gap-2'>
+          <span className='relative flex h-2 w-2'>
+            <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75'></span>
+            <span className='relative inline-flex rounded-full h-2 w-2 bg-indigo-500'></span>
+          </span>
+          <p className='text-xs font-bold tracking-[0.15em] text-slate-500 uppercase'>
+            Best AI Image <span className='text-indigo-600'>Generator</span>
+          </p>
+        </div>
+      </motion.div>
 
-   <motion.div
-   initial={{opacity:0}}
-           animate={{opacity:1}}
-           transition={{delay:1,duration:1}}
-   className='flex flex-wrap justify-center mt-16 gap-3 '>
-    {Array(6).fill('').map((item,index)=>(<motion.img whileHover={{scale:1.05 , duration:0.1}} className='rounded hover:scale-105 transition-all duration-300 cursor-pointer max-sm:w-10'src ={index %2==0 ?assets.sample_img_2:assets.sample_img_1}key={index}width={70}/>
-    ))
-    }
-   </motion.div>
-   <motion.p 
-   initial={{opacity:0 }}
-           animate={{opacity:1}}
-           transition={{delay:1.2,duration:0.8}}
-   className='mt-2 text-neutral-600'>Generated Images from Imagify   </motion.p>
+      {/* 2. Main Heading with Indigo Contrast */}
+      <motion.h1 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.3, duration: 0.8 }}
+        className='mt-4 max-w-2xl text-5xl sm:text-7xl font-bold tracking-tight text-slate-900 leading-[1.1]'
+      >
+        Turn text to <span className='bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent'>image</span>, in seconds.
+      </motion.h1>
+
+      <motion.p 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 1 }}
+        className='mt-6 max-w-lg text-lg text-slate-500 leading-relaxed'
+      >
+        Unleash your creativity with AI. Turn your imagination into visual art in seconds – just type and watch the magic happen.
+      </motion.p>
+
+      {/* 3. Pro Button with Improved Hover & Cursor */}
+      <motion.button 
+        whileHover={{ scale: 1.05, backgroundColor: '#4f46e5' }}
+        whileTap={{ scale: 0.95 }}
+        onClick={onClickHandler}
+        className='mt-10 px-12 py-4 bg-slate-900 text-white rounded-full font-semibold flex items-center gap-3 shadow-xl shadow-indigo-100 transition-all cursor-pointer group'
+      >
+        Generate Images 
+        <img className='w-5 group-hover:rotate-12 transition-transform' src={assets.star_group} alt="" />
+      </motion.button>
+
+      {/* 4. Styled Image Grid (Adding Depth) */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.8, duration: 1 }}
+        className='mt-16 flex flex-wrap justify-center gap-4'
+      >
+        {[assets.sample_img_1, assets.sample_img_2, assets.sample_img_1, assets.sample_img_2].map((img, index) => (
+          <motion.div 
+            key={index}
+            whileHover={{ y: -8, scale: 1.02 }}
+            className='p-1.5 bg-white rounded-2xl shadow-lg border border-slate-50'
+          >
+            <img 
+              className='w-24 sm:w-28 rounded-xl grayscale hover:grayscale-0 transition-all duration-700 cursor-pointer' 
+              src={img} 
+              alt="" 
+            />
+          </motion.div>
+        ))}
+      </motion.div>
     </motion.div>
   )
 }
