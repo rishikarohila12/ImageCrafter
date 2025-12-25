@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import "tailwindcss";
+
+* {
+  font-family: 'Outfit', sans-serif;
+}
+.placeholder-color{
+  color:#e0e0e0;
+  font-weight:300;
+}
+:root {
+  --primary-accent: #4f46e5; /* Modern Indigo */
+  --secondary-accent: #06b6d4; /* Pro Cyan */
+}
+
+body {
+  overflow-x: hidden;
+  color: #1e293b;
+}
+
+/* Pro-Developer Scroll Reveal */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: reveal linear forwards;
+  animation-timeline: view();
+  animation-range: entry 10% cover 30%;
+}
+
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Buttons and Interactivity */
+button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+@layer utilities {
+  /* Text Shimmer Effect */
+  .animate-shimmer {
+    animation: shimmer 3s linear infinite;
+  }
+
+  @keyframes shimmer {
+    to { background-position: 200% center; }
+  }
+
+  /* Entrance Fades */
+  .animate-fadeIn {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
