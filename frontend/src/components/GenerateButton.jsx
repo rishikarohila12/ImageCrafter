@@ -2,11 +2,13 @@ import React ,{useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from "motion/react"
 import { assets } from '../assets/assets'
+import toast from "react-hot-toast";
+
 import { AppContext } from '../context/AppContext'
 
 
 const GenerateButton = () => {
- const {user, setshowLogin}=useContext(AppContext)
+ const {user, setShowLogin}=useContext(AppContext)
   const navigate=useNavigate();
   
   const onClickHandler=()=>{
@@ -14,7 +16,10 @@ const GenerateButton = () => {
       navigate('/result')
     }
     else{
-      setshowLogin(true)
+      toast.error("Please login first");
+
+      setShowLogin(true)
+
     }
   }
 

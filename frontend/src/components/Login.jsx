@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 
 const Login = () => {
     const [state ,setstate]=useState('Login')
-  const {setshowLogin,backendUrl ,setToken,setUser}=useContext(AppContext)
+  const {setShowLogin,backendUrl ,setToken,setUser}=useContext(AppContext)
 
   const[name,setName]=useState('')
   const[email,setEmail]=useState('')
@@ -30,7 +30,7 @@ const Login = () => {
         setToken(data.token)
         setUser(data.user)
         localStorage.setItem('token',data.token)
-        setshowLogin(false)
+        setShowLogin(false)
 
        }
        else{
@@ -50,7 +50,7 @@ const Login = () => {
         setToken(data.token) 
         setUser(data.user)
         localStorage.setItem('token',data.token)
-        setshowLogin(false)
+        setShowLogin(false)
 
        }
        else{
@@ -113,7 +113,7 @@ return()=>{
             <p className='mt-5 text-center '>Already have an account ?
                 <span className='text-blue-600 cursor-pointer'onClick={()=>setstate('Login')}>Login</span>
             </p>}
-            <img onClick={()=>setshowLogin(false)} src={assets.cross_icon}className='absolute top-5 right-5 cursor-pointer' />
+            <img onClick={()=>setShowLogin(false)} src={assets.cross_icon}className='absolute top-5 right-5 cursor-pointer' />
         </motion.form>
     </div>
   )

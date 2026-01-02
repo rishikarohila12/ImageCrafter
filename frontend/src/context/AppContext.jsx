@@ -7,7 +7,7 @@ export const AppContext=createContext()
 
 const AppContextProvider=(props)=>{
     const [user,setUser]=useState(null);
-     const[showLogin,setshowLogin]=useState(false);
+     const[showLogin,setShowLogin]=useState(false);
      const [token,setToken]=useState(localStorage.getItem('token'))
     const [credit,setCredit]=useState(false)
 
@@ -75,7 +75,7 @@ const AppContextProvider=(props)=>{
 
     
     const value={
-        user,setUser,showLogin,setshowLogin,backendUrl ,token,setToken,credit,setCredit,loadCreditData,logout,generateImage
+        user,setUser,showLogin,setShowLogin,backendUrl ,token,setToken,credit,setCredit,loadCreditData,logout,generateImage
     }
     return(
         <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
